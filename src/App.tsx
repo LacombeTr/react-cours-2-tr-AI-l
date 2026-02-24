@@ -1,9 +1,10 @@
 import "./App.css";
+import { PromptPanel } from "./components/PromptPanel";
 
 function App() {
     return (
         <>
-            <p className='text-2xl font-bold'>Test</p>
+            <PromptPanel />
         </>
     );
 }

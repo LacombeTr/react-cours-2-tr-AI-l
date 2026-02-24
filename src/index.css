@@ -1,5 +1,32 @@
 @import "tailwindcss";
 
+/* Animation de marche - alternance des poses */
+@keyframes walk-pose1 {
+    0%, 50% {
+        opacity: 1;
+    }
+    50.01%, 100% {
+        opacity: 0;
+    }
+}
+
+@keyframes walk-pose2 {
+    0%, 50% {
+        opacity: 0;
+    }
+    50.01%, 100% {
+        opacity: 1;
+    }
+}
+
+@utility animate-walk-pose1 {
+    animation: walk-pose1 0.4s steps(1) infinite;
+}
+
+@utility animate-walk-pose2 {
+    animation: walk-pose2 0.4s steps(1) infinite;
+}
+
 :root {
     font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
