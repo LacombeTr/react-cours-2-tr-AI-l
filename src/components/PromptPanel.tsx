@@ -16,7 +16,7 @@ export const PromptPanel = () => {
     });
 
     return (
-        <div className='grid grid-rows-[1fr_auto] gap-3 h-[calc(100vh-4rem)] w-full'>
+        <div className='grid grid-rows-[1fr_64px] gap-3 h-[calc(100vh-4rem)] w-full'>
             <div className='grid grid-cols-2 gap-3 w-full h-full'>
                 <div className='flex flex-col w-full h-full p-4 rounded-xl bg-white/20 text-white border-t-[0.5px] border-b border-t-white/40 border-b-white/40 backdrop-blur-sm'>
                     {loading ? (
@@ -33,6 +33,7 @@ export const PromptPanel = () => {
                     e.preventDefault();
                     const formData = new FormData(e.target as HTMLFormElement);
                     const prompt = formData.get("prompt") as string;
+                    setResponse(undefined);
                     sendPrompt(prompt).then((response) => {
                         if (response) {
                             setResponse(response);

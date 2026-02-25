@@ -8,10 +8,62 @@ type MapProps = {
     itineraireSteps: ItinerairePoint[];
 };
 
-// Fonction pour créer un icône Leaflet avec SVG personnalisé
-const createReactIcon = (svgHtml: string) => {
+// Seuil de proximité pour considérer deux étapes comme se chevauchant (en degrés)
+const OVERLAP_THRESHOLD = 0.002;
+
+// Regroupe les étapes par proximité et retourne pour chaque index son label
+const getStepLabels = (steps: ItinerairePoint[]): string[] => {
+    const labels: string[] = new Array(steps.length).fill("");
+    const visited = new Set<number>();
+
+    for (let i = 0; i < steps.length; i++) {
+        if (visited.has(i)) continue;
+        const group: number[] = [i];
+        visited.add(i);
+
+        for (let j = i + 1; j < steps.length; j++) {
+            if (visited.has(j)) continue;
+            const dLat = Math.abs(parseFloat(steps[i].lat) - parseFloat(steps[j].lat));
+            const dLng = Math.abs(parseFloat(steps[i].lng) - parseFloat(steps[j].lng));
+            if (dLat < OVERLAP_THRESHOLD && dLng < OVERLAP_THRESHOLD) {
+                group.push(j);
+                visited.add(j);
+            }
+        }
+
+        const label = group.map((idx) => idx + 1).join("/");
+        for (const idx of group) {
+            labels[idx] = label;
+        }
+    }
+
+    return labels;
+};
+
+// Fonction pour créer un icône Leaflet avec SVG personnalisé et un label d'étape
+const createReactIcon = (svgHtml: string, stepLabel: string) => {
     return L.divIcon({
-        html: svgHtml,
+        html: `
+            <div style="position:relative;display:inline-block;">
+                ${svgHtml}
+                <span style="
+                    position:absolute;
+                    top:-8px;
+                    right:-50%;
+                    background:#1e293b;
+                    color:#fff;
+                    font-size:11px;
+                    font-weight:700;
+                    border-radius:9999px;
+                    padding:1px 5px;
+                    line-height:1.3;
+                    white-space:nowrap;
+                    border:1.5px solid #fff;
+                    box-shadow:0 1px 3px rgba(0,0,0,0.4);
+                    pointer-events:none;
+                ">${stepLabel}</span>
+            </div>
+        `,
         className: "react-icon-marker",
         iconSize: [32, 32],
         iconAnchor: [16, 32],
@@ -60,6 +112,8 @@ const MapUpdater = ({ itineraireSteps }: MapProps) => {
 };
 
 export const Map = ({ itineraireSteps }: MapProps) => {
+    const stepLabels = getStepLabels(itineraireSteps);
+
     return (
         <>
             <style>{`
@@ -68,6 +122,7 @@ export const Map = ({ itineraireSteps }: MapProps) => {
                     align-items: center;
                     justify-content: center;
                     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+                    overflow: visible !important;
                 }
             `}</style>
             <MapContainer
@@ -91,11 +146,11 @@ export const Map = ({ itineraireSteps }: MapProps) => {
                 />
 
                 {itineraireSteps.map((step, index) =>
-                    index === 0 ? (
+                    index === 0 || index === itineraireSteps.length - 1 ? (
                         <Marker
                             key={index}
                             position={[parseFloat(step.lat), parseFloat(step.lng)]}
-                            icon={createReactIcon(getLocationDotSVG("#ef4444"))}
+                            icon={createReactIcon(getLocationDotSVG("#ef4444"), stepLabels[index])}
                         >
                             <Popup>
                                 <h3>{step.point_interet}</h3>
@@ -107,7 +162,7 @@ export const Map = ({ itineraireSteps }: MapProps) => {
                         <Marker
                             key={index}
                             position={[parseFloat(step.lat), parseFloat(step.lng)]}
-                            icon={createReactIcon(getMapPinSVG("#35530e"))}
+                            icon={createReactIcon(getMapPinSVG("#35530e"), stepLabels[index])}
                         >
                             <Popup>
                                 <h3>{step.point_interet}</h3>

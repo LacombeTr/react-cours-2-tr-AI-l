@@ -52,8 +52,8 @@ export const usePrompt = ({
                 "itineraire": [
                     {
                         "point_interet": "Nom du point d'intérêt",
-                        "lat": "Latitude du point d'intérêt (soit precis recherche vraiment le point sur google map)",
-                        "lng": "Longitude du point d'intérêt (soit precis recherche vraiment le point sur google map)",
+                        "lat": "Latitude du point d'intérêt",
+                        "lng": "Longitude du point d'intérêt",
                         "description": "Description du point d'intérêt",
                         "distance": "Distance depuis le point de départ ou le point précédent",
                         "temps_estime": "Temps de marche estimé pour atteindre ce point depuis le point de départ ou le point précédent",
