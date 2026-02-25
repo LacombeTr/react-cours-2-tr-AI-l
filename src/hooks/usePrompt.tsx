@@ -17,7 +17,7 @@ type UsePromptReturn = {
 };
 
 export const usePrompt = ({
-    model = "gpt-5o-mini",
+    model = "gpt-5-mini",
     setPromptMessage,
 }: UsePromptParam): UsePromptReturn => {
     const [loading, setLoading] = useState(false);
@@ -52,7 +52,8 @@ export const usePrompt = ({
                 "itineraire": [
                     {
                         "point_interet": "Nom du point d'intérêt",
-                        "coordonnees": "Coordonnées GPS du point d'intérêt",
+                        "lat": "Latitude du point d'intérêt",
+                        "lng": "Longitude du point d'intérêt",
                         "description": "Description du point d'intérêt",
                         "distance": "Distance depuis le point de départ ou le point précédent",
                         "temps_estime": "Temps de marche estimé pour atteindre ce point depuis le point de départ ou le point précédent",
