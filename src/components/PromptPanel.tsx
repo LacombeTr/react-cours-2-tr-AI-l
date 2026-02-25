@@ -1,4 +1,4 @@
-import { LuLoaderCircle } from "react-icons/lu";
+import { LuLoaderCircle, LuCompass } from "react-icons/lu";
 import { PiPersonSimpleHikeBold } from "react-icons/pi";
 import { usePrompt } from "../hooks/usePrompt";
 import { useState } from "react";
@@ -16,18 +16,8 @@ export const PromptPanel = () => {
     });
 
     return (
-        <div className='grid grid-rows-[1fr_64px] gap-3 h-[calc(100vh-4rem)] w-full'>
-            <div className='grid grid-cols-2 gap-3 w-full h-full'>
-                <div className='flex flex-col w-full h-full p-4 rounded-xl bg-white/20 text-white border-t-[0.5px] border-b border-t-white/40 border-b-white/40 backdrop-blur-sm'>
-                    {loading ? (
-                        <Funnyloader />
-                    ) : (
-                        <InfoPanel response={response} />
-                    )}
-                </div>
-                <Map itineraireSteps={response?.itineraire || []} />
-            </div>
-
+        <div className='flex flex-col gap-4 h-full w-full'>
+            {/* Search bar */}
             <form
                 onSubmit={(e) => {
                     e.preventDefault();
@@ -42,30 +32,52 @@ export const PromptPanel = () => {
                 }}
                 className='w-full'
             >
-                <div className='grid grid-cols-[auto_5vw] gap-3 w-full'>
-                    <input
-                        type='text'
-                        name='prompt'
-                        value={promptMessage}
-                        onInput={(e) => setPromptMessage(e.currentTarget.value)}
-                        placeholder='Où allons-nous ?'
-                        className='w-full p-4 rounded-xl bg-white/20 text-white placeholder-white/80 border-t-[0.5px] border-b  border-t-white/40 border-b-white/40 focus:outline-none focus:ring-[0.5px] focus:ring-white/60 focus:border-white/60 transition-all duration-300 backdrop-blur-sm'
-                    />
+                <div className='flex gap-3 w-full'>
+                    <div className='relative flex-1'>
+                        <LuCompass className='absolute left-4 top-1/2 -translate-y-1/2 text-stone-400' size={20} />
+                        <input
+                            type='text'
+                            name='prompt'
+                            value={promptMessage}
+                            onInput={(e) => setPromptMessage(e.currentTarget.value)}
+                            placeholder='Décrivez votre randonnée idéale... (ex: "Boucle de 3h dans le Vercors")'
+                            className='w-full pl-12 pr-4 py-3.5 rounded-2xl bg-white/80 text-peak placeholder-stone-400 border border-stone-200/60 focus:outline-none focus:ring-2 focus:ring-alpine-400/50 focus:border-alpine-400/50 transition-all duration-300 backdrop-blur-md shadow-lg shadow-black/5 text-sm'
+                        />
+                    </div>
                     <button
                         type='submit'
-                        className='cursor-pointer group h-full bg-linear-to-br from-lime-400/20 to-lime-600/20 text-white py-4 rounded-xl hover:from-lime-400/40 hover:to-lime-600/40 transition-all duration-300 flex items-center justify-center gap-2 border-t-[0.5px] border-b border-t-lime-400/20 border-b-lime-400/20 backdrop-blur-sm shadow-lg hover:shadow-xl'
+                        disabled={loading}
+                        className='cursor-pointer group px-6 py-3.5 bg-linear-to-br from-alpine-600 to-alpine-800 text-white rounded-2xl hover:from-alpine-500 hover:to-alpine-700 active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-alpine-900/30 hover:shadow-xl hover:shadow-alpine-900/40 disabled:opacity-60 disabled:cursor-not-allowed'
                     >
                         {loading ? (
                             <LuLoaderCircle
-                                size={24}
+                                size={20}
                                 className='animate-spin'
                             />
                         ) : (
-                            <PiPersonSimpleHikeBold size={24} />
+                            <>
+                                <PiPersonSimpleHikeBold size={20} />
+                                <span className='text-sm font-semibold hidden sm:inline'>Explorer</span>
+                            </>
                         )}
                     </button>
                 </div>
             </form>
+
+            {/* Content area */}
+            <div className='grid grid-cols-1 lg:grid-cols-2 gap-4 flex-1 min-h-0'>
+                {/* Info panel */}
+                <div className='flex flex-col w-full h-full rounded-2xl bg-white/70 backdrop-blur-md border border-white/40 shadow-xl shadow-black/5 overflow-hidden'>
+                    {loading ? (
+                        <Funnyloader />
+                    ) : (
+                        <InfoPanel response={response} />
+                    )}
+                </div>
+
+                {/* Map */}
+                <Map itineraireSteps={response?.itineraire || []} />
+            </div>
         </div>
     );
 };

@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
+import { LuMountainSnow } from "react-icons/lu";
 import "./FunnyLoader.css";
 
 export const Funnyloader = () => {
@@ -59,8 +60,21 @@ export const Funnyloader = () => {
     }, [randomPhrase]);
 
     return (
-        <div className='flex flex-col justify-center items-center w-full h-full rounded-xl '>
-            <p className='text-2xl text-white/80'>
+        <div className='flex flex-col justify-center items-center w-full h-full gap-6 p-8'>
+            {/* Mountain animation */}
+            <div className='relative'>
+                <div className='w-16 h-16 rounded-full bg-alpine-100 flex items-center justify-center mountain-pulse'>
+                    <LuMountainSnow size={32} className='text-alpine-600' />
+                </div>
+                {/* Animated trail dots */}
+                <div className='absolute -bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5'>
+                    <span className='w-1.5 h-1.5 rounded-full bg-alpine-400 trail-dot' style={{ animationDelay: '0ms' }} />
+                    <span className='w-1.5 h-1.5 rounded-full bg-alpine-400 trail-dot' style={{ animationDelay: '200ms' }} />
+                    <span className='w-1.5 h-1.5 rounded-full bg-alpine-400 trail-dot' style={{ animationDelay: '400ms' }} />
+                </div>
+            </div>
+
+            <p className='text-sm text-stone-500 text-center max-w-xs'>
                 {randomPhrase.split('').map((char, index) => (
                     <span
                         key={`${animationKey}-${index}`}

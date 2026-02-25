@@ -50,7 +50,7 @@ const createReactIcon = (svgHtml: string, stepLabel: string) => {
                     position:absolute;
                     top:-8px;
                     right:-50%;
-                    background:#1e293b;
+                    background:#29441e;
                     color:#fff;
                     font-size:11px;
                     font-weight:700;
@@ -58,7 +58,7 @@ const createReactIcon = (svgHtml: string, stepLabel: string) => {
                     padding:1px 5px;
                     line-height:1.3;
                     white-space:nowrap;
-                    border:1.5px solid #fff;
+                    border:1.5px solid #c5e6a4;
                     box-shadow:0 1px 3px rgba(0,0,0,0.4);
                     pointer-events:none;
                 ">${stepLabel}</span>
@@ -137,7 +137,7 @@ export const Map = ({ itineraireSteps }: MapProps) => {
                 zoom={itineraireSteps.length > 0 ? 13 : 2}
                 scrollWheelZoom={false}
                 style={{ width: "100%", height: "100%" }}
-                className='display flex justify-center items-center w-full h-full rounded-xl bg-white/20 text-white border-t-[0.5px] border-b border-t-white/40 border-b-white/40 backdrop-blur-sm'
+                className='display flex justify-center items-center w-full h-full rounded-2xl bg-white/70 backdrop-blur-md border border-white/40 shadow-xl shadow-black/5 overflow-hidden'
                 >
                 <MapUpdater itineraireSteps={itineraireSteps} />
                 <TileLayer
@@ -150,7 +150,7 @@ export const Map = ({ itineraireSteps }: MapProps) => {
                         <Marker
                             key={index}
                             position={[parseFloat(step.lat), parseFloat(step.lng)]}
-                            icon={createReactIcon(getLocationDotSVG("#ef4444"), stepLabels[index])}
+                            icon={createReactIcon(getLocationDotSVG("#d97706"), stepLabels[index])}
                         >
                             <Popup>
                                 <h3>{step.point_interet}</h3>
@@ -162,7 +162,7 @@ export const Map = ({ itineraireSteps }: MapProps) => {
                         <Marker
                             key={index}
                             position={[parseFloat(step.lat), parseFloat(step.lng)]}
-                            icon={createReactIcon(getMapPinSVG("#35530e"), stepLabels[index])}
+                            icon={createReactIcon(getMapPinSVG("#488222"), stepLabels[index])}
                         >
                             <Popup>
                                 <h3>{step.point_interet}</h3>

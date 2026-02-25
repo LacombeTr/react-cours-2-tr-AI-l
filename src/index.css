@@ -27,9 +27,49 @@
     animation: walk-pose2 0.4s steps(1) infinite;
 }
 
+@theme {
+    --color-alpine-50: #f2faec;
+    --color-alpine-100: #e1f3cf;
+    --color-alpine-200: #c5e6a4;
+    --color-alpine-300: #a0d46e;
+    --color-alpine-400: #7dbe45;
+    --color-alpine-500: #5ea22e;
+    --color-alpine-600: #488222;
+    --color-alpine-700: #38651f;
+    --color-alpine-800: #2f511e;
+    --color-alpine-900: #29441e;
+
+    --color-earth-50: #fdf8f0;
+    --color-earth-100: #f5e6d3;
+    --color-earth-200: #e8d0b3;
+    --color-earth-300: #d4a574;
+    --color-earth-400: #c4854a;
+    --color-earth-500: #a0673a;
+    --color-earth-600: #7c4f2d;
+    --color-earth-700: #5c3a21;
+    --color-earth-800: #3d2715;
+    --color-earth-900: #2a1a0e;
+
+    --color-stone-50: #f8f7f4;
+    --color-stone-100: #edeae4;
+    --color-stone-200: #d8d3c8;
+    --color-stone-300: #b8b0a0;
+    --color-stone-400: #968c78;
+    --color-stone-500: #7a7060;
+    --color-stone-600: #635a4c;
+    --color-stone-700: #4d463c;
+    --color-stone-800: #3a342d;
+    --color-stone-900: #2a2520;
+
+    --color-sky-light: #e0f2fe;
+    --color-sky-soft: #bae6fd;
+    --color-peak: #1e3524;
+    --color-trail: #d97706;
+}
+
 :root {
-    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-    line-height: 1.5;
+    font-family: 'Outfit', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
     font-weight: 400;
 
     color-scheme: light;
@@ -37,4 +77,27 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+/* Custom scrollbar for hiking theme */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(30, 58, 47, 0.3);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(30, 58, 47, 0.5);
 }
