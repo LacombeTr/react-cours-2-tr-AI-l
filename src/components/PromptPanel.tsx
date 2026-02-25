@@ -25,7 +25,7 @@ export const PromptPanel = () => {
                         <InfoPanel response={response} />
                     )}
                 </div>
-                <Map />
+                <Map itineraireSteps={response?.itineraire || []} />
             </div>
 
             <form

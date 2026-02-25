@@ -1,6 +1,7 @@
 export type ItinerairePoint = {
     point_interet: string;
-    coordonnees: string;
+    lat: string;
+    lng: string;
     description: string;
     distance: string;
     temps_estime: string;
