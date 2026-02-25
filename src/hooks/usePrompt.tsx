@@ -17,7 +17,7 @@ type UsePromptReturn = {
 };
 
 export const usePrompt = ({
-    model = "gpt-5-mini",
+    model = "gpt-4o-mini",
     setPromptMessage,
 }: UsePromptParam): UsePromptReturn => {
     const [loading, setLoading] = useState(false);
@@ -41,7 +41,7 @@ export const usePrompt = ({
             Tu es un guide de voyage pour randonneurs. Mon utilisateur souhaite un itinéraire de randonnée suivant cette description:
             "${promptMessage}", et tu dois lui répondre avec un itinéraire de randonnée détaillé, incluant les points d'intérêt, les distances, les temps de marche estimés, et les conseils pour la randonnée.
             
-            Renvoie moi cet itinéraire sous la forme d'un JSON avec les champs suivants:
+            Renvoie  moi cet itinéraire sous la forme d'un JSON avec les champs suivants:
             {
                 "destination": "Nom de la destination de la randonnée",
                 "depart": "Point de départ de la randonnée",
