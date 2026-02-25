@@ -17,7 +17,7 @@ type UsePromptReturn = {
 };
 
 export const usePrompt = ({
-    model = "gpt-4o-mini",
+    model = "gpt-5-nano",
     setPromptMessage,
 }: UsePromptParam): UsePromptReturn => {
     const [loading, setLoading] = useState(false);

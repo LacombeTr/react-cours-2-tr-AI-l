@@ -5,6 +5,7 @@ import { useState } from "react";
 import type { PromptReturn } from "../types/PromptReturn";
 import { InfoPanel } from "./InfoPanel";
 import { Funnyloader } from "./FunnyLoader";
+import { Map } from "./Map";
 
 export const PromptPanel = () => {
     const [promptMessage, setPromptMessage] = useState<string>("");
@@ -24,9 +25,7 @@ export const PromptPanel = () => {
                         <InfoPanel response={response} />
                     )}
                 </div>
-                <div className='display flex justify-center items-center w-full h-full p-4 rounded-xl bg-white/20 text-white border-t-[0.5px] border-b border-t-white/40 border-b-white/40 backdrop-blur-sm'>
-                    <p className='text-9xl'>MAP</p>
-                </div>
+                <Map />
             </div>
 
             <form
