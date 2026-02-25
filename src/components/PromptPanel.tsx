@@ -4,6 +4,7 @@ import { usePrompt } from "../hooks/usePrompt";
 import { useState } from "react";
 import type { PromptReturn } from "../types/PromptReturn";
 import { InfoPanel } from "./InfoPanel";
+import { Funnyloader } from "./FunnyLoader";
 
 export const PromptPanel = () => {
     const [promptMessage, setPromptMessage] = useState<string>("");
@@ -18,7 +19,7 @@ export const PromptPanel = () => {
             <div className='grid grid-cols-2 gap-3 w-full h-full'>
                 <div className='flex flex-col w-full h-full p-4 rounded-xl bg-white/20 text-white border-t-[0.5px] border-b border-t-white/40 border-b-white/40 backdrop-blur-sm'>
                     {loading ? (
-                        <p className='text-white'>Chargement en cours...</p>
+                        <Funnyloader />
                     ) : (
                         <InfoPanel response={response} />
                     )}
